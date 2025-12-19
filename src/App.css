@@ -29,11 +29,20 @@ h1 {
 }
 
 .product-card {
+  text-decoration: none;
+  color: inherit;
   background: var(--card);
   padding: 1.25rem;
   border-radius: 18px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
 
 .product-card p {
   margin: 0;
