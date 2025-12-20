@@ -614,5 +614,209 @@ export const products = [
     link: "https://shop.lululemon.com/p/women-shorts/Pace-Rival-High-Rise-Short-3/_/prod11871281?color=0002",
     tags: ["athletic", "sporty", "running", "active", "performance"],
     image: "https://images.lululemon.com/is/image/lululemon/LW7DIAS_0002_1?$product_tile$&wid=750&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72"
+  },
+  {
+    id: 90,
+    name: "Tacoma Platform Clog Slippers",
+    link: "https://www.target.com/p/women-s-tacoma-platform-clog-slippers-auden-brown/-/A-94643962",
+    tags: ["celebrity cozy", "model off-duty", "it girl", "coffee run", "effortless chic"],
+    image: "https://target.scene7.com/is/image/Target/GUEST_4f0dc683-5b4e-4c8f-a749-125b6c038073?wid=384&qlt=80"
+  },
+  {
+    id: 91,
+    name: "BruMate Era 40oz Leak-Proof Tumbler",
+    link: "https://www.target.com/p/brumate-era-40oz-100-leak-proof-straw-tumbler/-/A-94935651",
+    tags: ["celebrity hydration", "pilates princess", "errands aesthetic", "clean girl", "influencer essential"],
+    image: "https://target.scene7.com/is/image/Target/GUEST_e0a3a5e5-0771-4781-a728-08c3863e231e?wid=384&qlt=80"
+  },
+  {
+    id: 92,
+    name: "Frigidaire Gallery Beauty Lighted Mirror Fridge",
+    link: "https://www.target.com/p/frigidaire-gallery-9-can-beauty-lighted-mirror-fridge-white/-/A-90792448",
+    tags: ["celebrity vanity", "skincare fridge", "hollywood glam", "beauty influencer", "get ready with me"],
+    image: "https://target.scene7.com/is/image/Target/GUEST_33c1d575-af07-4705-b7a2-f09d043eee11?wid=384&qlt=80"
+  },
+  {
+    id: 93,
+    name: "Cloud Knit Pajama Set",
+    link: "https://www.target.com/p/women-s-cloud-knit-short-sleeve-notch-collar-top-and-shorts-pajama-set-auden/-/A-90471473",
+    tags: ["celebrity sleepwear", "model off-duty", "soft girl", "night routine", "luxury lounge"],
+    image: "https://target.scene7.com/is/image/Target/GUEST_18cb8b08-7e4b-4c74-a84a-929043f84d37?qlt=85&fmt=pjpeg&hei=500&wid=500"
+  },
+  {
+    id: 94,
+    name: "Vitamasques Lip Treats Snow Edition",
+    link: "https://www.target.com/p/vitamasques-lip-treats-snow-edition-4ct/-/A-94711264",
+    tags: ["celebrity lips", "red carpet prep", "glam routine", "beauty secret", "it girl essentials"],
+    image: "https://target.scene7.com/is/image/Target/GUEST_7d12831c-55de-40ee-828e-2c9db5b520b8?qlt=85&fmt=pjpeg&hei=500&wid=500"
+  },
+  {
+    id: 95,
+    name: "Beats Solo 4 Wireless Headphones",
+    link: "https://www.target.com/p/beats-solo-4-bluetooth-wireless-on-ear-headphones/-/A-91975105",
+    tags: ["celebrity airport fit", "studio vibes", "pop star energy", "on-the-go glam", "music icon"],
+    image: "https://target.scene7.com/is/image/Target/GUEST_6037f8a0-df3b-427f-806e-160d5a0ddb4f?wid=1200&hei=1200&qlt=80"
+  },
+  {
+    id: 100,
+    name: "Jellycat Amuseables Cherries Bag Charm",
+    link: "https://us.jellycat.com/amuseables-cherries-bag-charm/",
+    tags: ["it girl accessory", "celebrity bag charm", "coquette core", "paparazzi aesthetic", "playful luxe"],
+    image: "https://cdn11.bigcommerce.com/s-23s5gfmhr7/images/stencil/1000w/products/1725/51567/A4CHSBC__77828.1762532863.jpg?c=1"
+  },
+  {
+    id: 101,
+    name: "Jellycat Smudge Rabbit Bag Charm",
+    link: "https://us.jellycat.com/smudge-rabbit-bag-charm/",
+    tags: ["celebrity cute", "soft girl era", "model off-duty", "bag candy", "quiet luxury playful"],
+    image: "https://cdn11.bigcommerce.com/s-23s5gfmhr7/images/stencil/640w/products/1496/45825/SMG4RBC_2__67681.1.jpg"
+  },
+  {
+    id: 102,
+    name: "Jellycat Amuseables Coffee-To-Go Bag",
+    link: "https://us.jellycat.com/amuseables-coffee-to-go-bag/",
+    tags: ["celebrity coffee run", "LA influencer", "street style moment", "pap walk vibes", "quirky chic"],
+    image: "https://cdn11.bigcommerce.com/s-23s5gfmhr7/images/stencil/640w/products/189/48589/A4COFB_1__95759.1.jpg"
+  },
+  {
+    id: 103,
+    name: "Jellycat Peanut Penguin",
+    link: "https://us.jellycat.com/peanut-penguin/",
+    tags: ["celebrity shelfie", "cute-core", "it girl decor", "soft luxe", "viral plush"],
+    image: "https://cdn11.bigcommerce.com/s-23s5gfmhr7/images/stencil/640w/products/1150/47723/PNM3PN_1__38941.1.jpg"
+  },
+  {
+    id: 104,
+    name: "AE Long-Sleeve Henley T-Shirt",
+    link: "https://www.ae.com/us/en/p/women/t-shirts/classic-t-shirts/ae-long-sleeve-henley-t-shirt/3376_1380_092",
+    tags: ["off-duty celeb", "model basics", "paparazzi casual", "clean girl staples", "celebrity layering"],
+    image: "https://s7d2.scene7.com/is/image/aeo/3376_1380_092_os?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 105,
+    name: "AE Long-Sleeve Henley T-Shirt (Cream)",
+    link: "https://www.ae.com/us/en/p/women/t-shirts/classic-t-shirts/ae-long-sleeve-henley-t-shirt/3376_1129_106",
+    tags: ["it-girl neutral", "celebrity basics", "LA street style", "effortless chic", "quiet luxury vibes"],
+    image: "https://s7d2.scene7.com/is/image/aeo/3376_1129_106_of?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 106,
+    name: "AE Half-Zip Pullover Sweater",
+    link: "https://www.ae.com/us/en/p/women/sweaters-cardigans/sweaters/ae-half-zip-pullover-sweater/0341_1700_001",
+    tags: ["model off-duty", "celebrity airport fit", "Hailey Bieber energy", "cozy luxe", "fall paparazzi"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0341_1700_001_of?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 107,
+    name: "AE Long Weekend V-Neck Sweater",
+    link: "https://www.ae.com/us/en/p/women/sweaters-cardigans/sweaters/ae-long-weekend-v-neck-sweater/0348_1684_410",
+    tags: ["celebrity cozy", "it girl weekend", "off-camera chic", "soft girl aesthetic", "street style knit"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0348_1684_410_ob?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 108,
+    name: "AE Low-Rise Baggy Cargo Pants",
+    link: "https://www.ae.com/us/en/p/women/pants/stovepipe-straight-leg-pants/ae-low-rise-baggy-straight-cargo-pant/0461_5697_839",
+    tags: ["Y2K celebrity", "Bella Hadid core", "pap walk pants", "cool-girl cargo", "streetwear muse"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0461_5697_839_ob?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 109,
+    name: "AE x TSITP Mock Neck Sweatshirt",
+    link: "https://www.ae.com/us/en/p/women/hoodies-sweatshirts/crew-neck-sweatshirts/ae-x-the-summer-i-turned-pretty-mock-neck-sweatshirt/0455_3080_738",
+    tags: ["celebrity TV collab", "soft launch fit", "it girl fandom", "coastal celeb vibes", "trending sweatshirt"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0455_3080_738_f?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 110,
+    name: "AE Main Squeeze Cami",
+    link: "https://www.ae.com/us/en/p/women/tank-tops-tube-tops/tank-tops-camis/ae-main-squeeze-cami/3171_6393_115",
+    tags: ["celebrity layering", "model basics", "it girl cami", "effortless sexy", "street style staple"],
+    image: "https://s7d2.scene7.com/is/image/aeo/3171_6393_115_os?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 111,
+    name: "AE Earrings 18-Pack",
+    link: "https://www.ae.com/us/en/p/women/jewelry/earrings/ae-earrings-18-pack/0484_9292_709",
+    tags: ["celebrity accessories", "ear stack trend", "it girl jewelry", "paparazzi glam", "TikTok famous"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0484_9292_709_b?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 112,
+    name: "AE Silver Earrings 18-Pack",
+    link: "https://www.ae.com/us/en/p/women/jewelry/earrings/ae-silver-earrings-18-pack/0484_9283_013",
+    tags: ["clean girl jewelry", "celebrity minimal", "model off-duty", "silver girl era", "quiet luxury"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0484_9283_013_b?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 113,
+    name: "AE Lace Trim Blouse",
+    link: "https://www.ae.com/us/en/p/women/shirts-blouses/blouses/ae-lace-trim-blouse/0358_6632_106",
+    tags: ["romantic celebrity", "coquette core", "it girl blouse", "vintage muse", "soft glam"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0358_6632_106_b?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 114,
+    name: "AE Snoopy Valentine Tote Bag",
+    link: "https://www.ae.com/us/en/p/women/belts-bags/bags/ae-snoopy-valentines-day-canvas-tote-bag/0427_9351_615",
+    tags: ["celebrity tote", "off-duty errands", "it girl accessory", "cute-core", "pap walk bag"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0427_9351_615_d1?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 115,
+    name: "AE Strappy Go Lucky Tank",
+    link: "https://www.ae.com/us/en/p/women/tank-tops-tube-tops/tank-tops-camis/ae-strappy-go-lucky-tank-top/0366_6534_106",
+    tags: ["celebrity summer top", "model layering", "it girl essential", "minimal chic", "street style tank"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0366_6534_106_f?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 116,
+    name: "AE Cherry Earrings",
+    link: "https://www.ae.com/us/en/p/women/jewelry/earrings/ae-cherry-earrings/0484_9288_709",
+    tags: ["playful celebrity", "coquette accessory", "viral earrings", "it girl detail", "cute luxe"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0484_9288_709_f?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 117,
+    name: "AE Ruffled Flannel PJ Set",
+    link: "https://www.ae.com/us/en/p/women/loungewear-pjs/pajamas-pj-sets/ae-ruffled-flannel-pj-set/0575_1353_700",
+    tags: ["celebrity cozy", "sleepover chic", "it girl lounge", "soft luxe", "viral pajamas"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0575_1353_700_ob?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 118,
+    name: "NY Yankees Valentine Hat",
+    link: "https://www.ae.com/us/en/p/women/hats/baseball-trucker-hats/47-new-york-yankees-valentines-day-baseball-hat/5421_2515_200",
+    tags: ["celebrity baseball cap", "off-duty model", "paparazzi staple", "it girl hat", "street style icon"],
+    image: "https://s7d2.scene7.com/is/image/aeo/5421_2515_200_f?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 119,
+    name: "AE Gingham Shoelace Charm Set",
+    link: "https://www.ae.com/us/en/p/women/toys-fun/seasonal-fun/ae-gingham-shoelace-charm-set/0577_9275_900",
+    tags: ["celebrity micro-trend", "it girl details", "Y2K revival", "street style charm", "viral accessory"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0577_9275_900_of?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 120,
+    name: "AE Valentine Crew Socks (2-Pack)",
+    link: "https://www.ae.com/us/en/p/women/accessories-socks/socks/ae-valentines-day-cropped-crew-socks-2-pack/0425_4059_261",
+    tags: ["celebrity cozy", "off-duty fit", "it girl basics", "soft girl aesthetic", "pap walk comfort"],
+    image: "https://s7d2.scene7.com/is/image/aeo/0425_4059_261_f?$plp-web-desktop$&fmt=webp"
+  },
+  {
+    id: 136,
+    name: "High Boots",
+    link: "https://www.pinterest.com/pin/4595923523037290752/",
+    tags: ["celebrity outfit inspo", "paparazzi moodboard", "red carpet vibes", "it girl inspo", "viral outfit"],
+    image: "https://i.pinimg.com/736x/d8/d2/69/d8d2693334f78c5e207b23114cc5bad5.jpg"
+  },
+  {
+    id: 137,
+    name: "The Hair Edit Runway Ribbon Hair Elastics",
+    link: "https://www.target.com/p/the-hair-edit-runway-ribbon-hair-elastics/-/A-91802711?sid=2091S&afid=google&TCID=OGS&CPNG=Beauty&adgroup=63-4",
+    tags: ["celebrity hair trend", "runway braid vibes", "it girl accessories", "red carpet hair", "pap walk pony"],
+    image: "https://target.scene7.com/is/image/Target/GUEST_b8af625b-1c1c-4d2d-b159-a89995db0507?wid=750&qlt=80"
   }
+  
 ];
