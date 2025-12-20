@@ -1,26 +1,48 @@
-.celebrity-grid {
+/* Horizontal scroll container */
+.celebrity-scroll {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    overflow-x: auto;        /* scroll horizontally */
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    scroll-behavior: smooth;
   }
   
-  .celebrity-btn {
-    background: var(--card);
-    border: 1px solid #eee;
-    padding: 0.6rem 1.2rem;
-    border-radius: 999px;
+  /* Each celebrity card */
+  .celebrity-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
+    min-width: 100px;        /* fixed width for each card */
+    flex-shrink: 0;           /* prevents shrinking in flex container */
+    text-align: center;
+    padding: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .celebrity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Circular celebrity image */
+  .celebrity-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;      /* makes image circular */
+    object-fit: cover;       /* crop if necessary */
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Celebrity name */
+  .celebrity-name {
     font-size: 0.9rem;
-    transition: all 0.2s ease;
+    font-weight: 500;
   }
   
-  .celebrity-btn:hover {
-    background: var(--accent);
+  /* Highlight selected celebrity */
+  .celebrity-card.selected {
+    border: 2px solid var(--accent);
+    border-radius: 12px;
   }
-  
-  .celebrity-btn.selected {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-  
   

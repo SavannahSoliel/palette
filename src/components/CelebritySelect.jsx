@@ -1,4 +1,5 @@
 import { celebrities } from "../data/celebrities";
+import "./CelebritySelect.css";
 
 function CelebritySelect({ selected, setSelected }) {
   function toggleCelebrity(name) {
@@ -10,19 +11,26 @@ function CelebritySelect({ selected, setSelected }) {
   }
 
   return (
-    <div>
-      <p>celebrity select loaded</p>
+    <div className="celebrity-scroll">
+      {celebrities.map((celeb) => (
+        <div
+          key={celeb.id}
+          className={`celebrity-card ${selected.includes(celeb.name) ? "selected" : ""}`}
+          onClick={() => toggleCelebrity(celeb.name)}
+        >
+          {/* Circular image */}
+          {celeb.image && (
+            <img
+              src={celeb.image}
+              alt={celeb.name}
+              className="celebrity-image"
+            />
+          )}
 
-      <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
-        {celebrities.map((celeb) => (
-          <button
-            key={celeb.id}
-            onClick={() => toggleCelebrity(celeb.name)}
-          >
-            {celeb.name}
-          </button>
-        ))}
-      </div>
+          {/* Celebrity name */}
+          <p className="celebrity-name">{celeb.name}</p>
+        </div>
+      ))}
     </div>
   );
 }
