@@ -4,21 +4,24 @@ export const products = [
       name: "Soft Pink Lip Gloss",
       brand: "Glossier",
       link: "https://www.glossier.com/products/lip-gloss?variant=45798167675125",
-      tags: ["soft", "feminine", "pastel"]
+      tags: ["soft", "feminine", "pastel"],
+      image: "https://glossier-prod.imgix.net/files/glossier-lipgloss-pink-carousel-01.png?auto=compress,format&cs=srgb&w=1374?auto=compress,format&cs=srgb" 
     },
     {
       id: 2,
       name: "Minimal Gold Necklace",
       brand: "Etsy",
-      link: "https://www.etsy.com/listing/1797455914/gold-plated-enamel-sakura-flower?ls=s&ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=gold+necklace&ref=sr_gallery-1-27&pro=1&frs=1&pop=1&content_source=6046fb20-7973-4d26-b4c9-a38d32d5ad54%253ALT1ffac3a8d5b0677b3f7229bce63f7c2307347b26&organic_search_click=1&logging_key=6046fb20-7973-4d26-b4c9-a38d32d5ad54%3ALT1ffac3a8d5b0677b3f7229bce63f7c2307347b26",
-      tags: ["clean", "romantic", "minimal"]
+      link: "https://www.etsy.com/listing/1797455914/gold-plated-enamel-sakura-flower",
+      tags: ["clean", "romantic", "minimal"],
+      image: "https://i.etsystatic.com/55368172/r/il/ca2b5b/6414209728/il_1588xN.6414209728_r49q.jpg"
     },
     {
       id: 3,
       name: "Vintage Knit Cardigan",
       brand: "Urban Outfitters",
       link: "https://www.urbanoutfitters.com/shop/bdg-becca-brushed-knit-oversized-cardigan?color=006&searchparams=q%3Dcardigan",
-      tags: ["vintage", "cozy", "muted"]
+      tags: ["vintage", "cozy", "muted"],
+      image: "https://images.urbndata.com/is/image/UrbanOutfitters/102051414_006_c?$xlarge$&fit=constrain&fmt=webp&qlt=80&wid=1314"
     }
   ];
   

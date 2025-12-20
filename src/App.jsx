@@ -34,24 +34,36 @@ function App() {
         </p>
       ) : (
         <div className="product-grid">
-        {recommendations.map(product => (
-          <a
-          key={product.id}
-          href={product.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="product-card"
-        >
-        
-            <p className="product-name">{product.name}</p>
-            {product.matchedTags && (
-              <p className="product-tags">
-                {product.matchedTags.join(" • ")}
-              </p>
-            )}
-          </a>
-        ))}
-      </div>
+  {recommendations.map(product => (
+    <a
+      key={product.id}
+      href={product.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="product-card"
+    >
+      {/* Thumbnail Image */}
+      {product.image && (
+        <img
+          src={product.image}
+          alt={product.name}
+          className="product-thumbnail"
+        />
+      )}
+
+      {/* Product Name */}
+      <p className="product-name">{product.name}</p>
+
+      {/* Tags */}
+      {product.matchedTags && (
+        <p className="product-tags">
+          {product.matchedTags.join(" • ")}
+        </p>
+      )}
+    </a>
+  ))}
+</div>
+
 
       )}
     </div>
