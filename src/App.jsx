@@ -7,6 +7,9 @@ function App() {
   const [selectedCelebs, setSelectedCelebs] = useState([]);
 
   const recommendations = getRecommendations(selectedCelebs);
+  
+  // Shuffle the recommendations array
+  const shuffledRecommendations = shuffleArray([...recommendations]);
 
   return (
     <div className="app">
@@ -34,40 +37,44 @@ function App() {
         </p>
       ) : (
         <div className="product-grid">
-  {recommendations.map(product => (
-    <a
-      key={product.id}
-      href={product.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="product-card"
-    >
-      {/* Thumbnail Image */}
-      {product.image && (
-        <img
-          src={product.image}
-          alt={product.name}
-          className="product-thumbnail"
-        />
-      )}
+          {/* Use shuffledRecommendations instead of recommendations */}
+          {shuffledRecommendations.map(product => (
+            <a
+              key={product.id}
+              href={product.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="product-card"
+            >
+              {/* Thumbnail Image */}
+              {product.image && (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="product-thumbnail"
+                />
+              )}
 
-      {/* Product Name */}
-      <p className="product-name">{product.name}</p>
-
-      {/* Tags */}
-      {product.matchedTags && (
-        <p className="product-tags">
-          {product.matchedTags.join(" • ")}
-        </p>
-      )}
-    </a>
-  ))}
-</div>
-
-
+              {/* Product Name */}
+              <p className="product-name">{product.name}</p>
+            </a>
+          ))}
+        </div>
       )}
     </div>
   );
+}
+
+// Fisher-Yates shuffle algorithm - efficient and random
+function shuffleArray(array) {
+  const shuffled = [...array];
+  
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  
+  return shuffled;
 }
 
 export default App;
