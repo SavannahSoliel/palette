@@ -3,103 +3,110 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .left-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .right-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .trending-title {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 500;
   margin: 0;
-  color: #333;
+  color: var(--primary);
+  letter-spacing: -0.01em;
 }
 
 .selection-count {
-  font-size: 0.9rem;
-  color: var(--accent, #8a2be2);
-  background-color: rgba(138, 43, 226, 0.1);
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
+  font-size: 0.875rem;
+  color: var(--accent);
+  background-color: var(--accent-light);
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
   font-weight: 500;
 }
 
 /* Search Container */
 .search-container {
   position: relative;
-  width: 250px;
+  width: 280px;
 }
 
 .search-input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  padding-right: 2.5rem; /* Space for clear button */
-  border: 2px solid #e5e5e5;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-family: serif;
-  transition: border-color 0.2s ease;
+  padding: 0.875rem 1.25rem;
+  padding-right: 2.75rem;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  font-size: 0.95rem;
+  background-color: var(--card-bg);
+  color: var(--primary);
+  transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: var(--accent, #8a2be2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.search-input::placeholder {
+  color: var(--muted);
 }
 
 .clear-search {
   position: absolute;
-  right: 0.75rem;
+  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
   background: transparent;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  color: #999;
+  color: var(--muted);
   padding: 0;
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: color 0.2s ease;
 }
 
 .clear-search:hover {
-  color: #333;
+  color: var(--secondary);
 }
 
 /* Clear All Button */
 .clear-all-btn {
-  padding: 0.75rem 1.25rem;
-  background-color: #f8f8f8;
-  color: #666;
-  border: 2px solid #e5e5e5;
-  border-radius: 12px;
+  padding: 0.875rem 1.5rem;
+  background-color: var(--card-bg);
+  color: var(--secondary);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: serif;
   white-space: nowrap;
 }
 
 .clear-all-btn:hover {
-  background-color: #f0f0f0;
-  color: #333;
-  border-color: #ddd;
+  background-color: #f8f8f8;
+  color: var(--primary);
+  border-color: var(--border-hover);
 }
 
 .clear-all-btn:active {
@@ -108,84 +115,109 @@
 
 /* Search Results Section */
 .search-results-section {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .search-info {
-  margin-bottom: 1rem;
-  color: #666;
-  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  color: var(--secondary);
+  font-size: 0.95rem;
 }
 
 .no-results {
   text-align: center;
-  color: #999;
-  padding: 2rem;
+  color: var(--muted);
+  padding: 2.5rem;
   font-style: italic;
-  background-color: #f9f9f9;
-  border-radius: 12px;
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  border: 2px dashed var(--border);
+  margin: 1rem 0;
 }
 
 /* Container for horizontal scroll */
 .celebrity-scroll-container {
   position: relative;
   width: 100%;
-  overflow: hidden; /* Hide the overflow from the container */
+  overflow: hidden;
+  margin-top: 0.5rem;
 }
 
 /* Horizontal scroll container (ALL celebrities) */
 .celebrity-scroll {
   display: flex;
-  overflow-x: auto;        /* scroll horizontally */
+  overflow-x: auto;
   gap: 1.5rem;
-  padding: 0.5rem 0.25rem;
-  padding-bottom: 1.5rem;
+  padding: 1rem 0.5rem;
+  padding-bottom: 2rem;
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+}
+
+.celebrity-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.celebrity-scroll::-webkit-scrollbar-track {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+.celebrity-scroll::-webkit-scrollbar-thumb {
+  background: var(--accent);  /* Pink scrollbar */
+  border-radius: 10px;
+}
+
+.celebrity-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dark);  /* Darker pink on hover */
 }
 
 /* Grid Layout for Search Results */
 .celebrity-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 1.5rem;
   padding: 0.5rem;
   margin-top: 0.5rem;
 }
 
-/* Each celebrity card (works for both scroll and grid) */
+/* Each celebrity card */
 .celebrity-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
   text-align: center;
-  padding: 1rem;
-  border-radius: 12px;
-  background: white;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  border: 2px solid transparent;
-  min-width: 110px; /* For scroll container */
-  flex-shrink: 0;   /* Prevents shrinking in flex container */
-  user-select: none; /* Prevent text selection when dragging */
-  position: relative; /* For selection check */
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: var(--card-bg);
+  transition: all 0.3s ease;
+  border: 1.5px solid var(--border);
+  min-width: 120px;
+  flex-shrink: 0;
+  user-select: none;
+  position: relative;
 }
 
 .celebrity-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-hover);
 }
 
 /* Circular celebrity image */
 .celebrity-image {
   width: 80px;
   height: 80px;
-  border-radius: 50%;      /* makes image circular */
-  object-fit: cover;       /* crop if necessary */
-  margin-bottom: 0.75rem;
-  border: 2px solid #f0f0f0;
-  transition: border-color 0.2s ease;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 2px solid var(--border);
+  transition: border-color 0.2s ease, transform 0.3s ease;
+}
+
+.celebrity-card:hover .celebrity-image {
+  transform: scale(1.05);
 }
 
 /* Celebrity name */
@@ -193,7 +225,7 @@
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
-  color: #333;
+  color: var(--primary);
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -202,35 +234,35 @@
 
 /* Highlight selected celebrity */
 .celebrity-card.selected {
-  border-color: var(--accent, #8a2be2);
-  background-color: rgba(138, 43, 226, 0.05);
+  border-color: var(--accent);
+  background-color: var(--accent-light);
 }
 
 .celebrity-card.selected .celebrity-image {
-  border-color: var(--accent, #8a2be2);
+  border-color: var(--accent);
 }
 
 .celebrity-card.selected .celebrity-name {
-  color: var(--accent, #8a2be2);
+  color: var(--accent);
   font-weight: 600;
 }
 
 /* Selection check indicator */
 .selection-check {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  width: 24px;
-  height: 24px;
-  background-color: var(--accent, #8a2be2);
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 22px;
+  height: 22px;
+  background-color: var(--accent);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(255, 143, 171, 0.3);
 }
 
 /* Tags display for search results */
@@ -239,57 +271,30 @@
   flex-wrap: wrap;
   gap: 0.25rem;
   justify-content: center;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .tag-bubble {
   font-size: 0.7rem;
-  padding: 0.1rem 0.4rem;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  color: #666;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--pink-pastel);  /* Pastel pink tags */
+  border-radius: 12px;
+  color: var(--secondary);
   white-space: nowrap;
   max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Custom scrollbar styling */
-.celebrity-scroll::-webkit-scrollbar {
-  height: 8px;
-}
-
-.celebrity-scroll::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-  margin: 0 10px;
-}
-
-.celebrity-scroll::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 10px;
-  transition: background 0.2s ease;
-}
-
-.celebrity-scroll::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
-}
-
-/* Firefox scrollbar */
-.celebrity-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: #ccc #f1f1f1;
-}
-
-/* Scroll hint for users */
+/* Scroll hint gradient */
 .celebrity-scroll-container::after {
   content: "";
   position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
-  width: 40px;
-  background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+  width: 60px;
+  background: linear-gradient(to left, var(--background), transparent);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -304,7 +309,7 @@
   .top-controls {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1.25rem;
   }
   
   .left-section, .right-section {
@@ -318,12 +323,12 @@
   }
   
   .trending-title {
-    font-size: 1.1rem;
+    font-size: 1.125rem;
   }
   
   .celebrity-card {
-    min-width: 100px;
-    padding: 0.75rem;
+    min-width: 110px;
+    padding: 1rem;
   }
   
   .celebrity-image {
@@ -336,16 +341,20 @@
   }
   
   .clear-all-btn {
-    padding: 0.6rem 1rem;
+    padding: 0.75rem 1.25rem;
     font-size: 0.9rem;
+  }
+  
+  .celebrity-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1.25rem;
   }
 }
 
-/* For very small screens */
 @media (max-width: 480px) {
   .celebrity-card {
-    min-width: 90px;
-    padding: 0.5rem;
+    min-width: 100px;
+    padding: 0.875rem;
   }
   
   .celebrity-image {
@@ -355,19 +364,19 @@
   
   .celebrity-name {
     font-size: 0.8rem;
-    max-width: 85px;
-  }
-  
-  .celebrity-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1rem;
+    max-width: 90px;
   }
   
   .selection-check {
     width: 20px;
     height: 20px;
-    font-size: 0.8rem;
-    top: 0.4rem;
-    right: 0.4rem;
+    font-size: 0.75rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .celebrity-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
   }
 }

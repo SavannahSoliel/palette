@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import CelebritySelect from "./components/CelebritySelect";
 import { getRecommendations } from "./utils/recommend";
@@ -8,6 +8,18 @@ function App() {
   const [selectedCelebs, setSelectedCelebs] = useState([]);
   const [showWishlist, setShowWishlist] = useState(false);
   const [wishlist, setWishlist] = useState([]);
+
+  // Fade-in animation
+  useEffect(() => {
+    document.body.style.opacity = "0";
+    document.body.style.transition = "opacity 0.3s ease";
+    
+    const timer = setTimeout(() => {
+      document.body.style.opacity = "1";
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const recommendations = getRecommendations(selectedCelebs);
   
