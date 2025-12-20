@@ -17,7 +17,7 @@ h1 {
 
 .subtitle {
   color: var(--muted);
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .section-title {
@@ -32,53 +32,24 @@ h1 {
   gap: 1.25rem;
 }
 
-.product-card {
-  text-decoration: none;
-  color: inherit;
-  background: var(--card);
-  padding: 1rem;
-  border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;  /* center thumbnail */
-}
-
 .product-thumbnail {
-  width: 200px;       /* slightly bigger than before */
-  height: 200px;      /* keep square aspect */
-  object-fit: cover;  /* crop to fit nicely */
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
   border-radius: 12px;
   margin-bottom: 0.5rem;
-}
-
-
-
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-
-.product-card p {
-  margin: 0;
-
-.product-thumbnail {
-  width: 10px;
-  height: 10;
-  border-radius: 12px;
-  margin-bottom: 0.75rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-.section-title {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+.product-name {
+  font-size: 0.95rem;
   font-weight: 500;
+  margin: 0;
+  text-align: center;
+  line-height: 1.4;
+  color: #333;
 }
 
 .selected-text {
@@ -99,6 +70,4 @@ h1 {
   font-style: italic;
   background-color: #f9f9f9;
   border-radius: 12px;
-}
-  
 }
