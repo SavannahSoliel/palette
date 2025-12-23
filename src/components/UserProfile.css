@@ -1,0 +1,112 @@
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 12px;
+    background-color: var(--card-bg);
+    border: 1.5px solid var(--border);
+    margin-right: 1rem;
+  }
+  
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+  }
+  
+  .user-avatar-placeholder {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: 2px solid var(--border);
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.75rem;
+  }
+  
+  .user-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary);
+  }
+  
+  .user-email {
+    font-size: 0.75rem;
+    color: var(--secondary);
+  }
+  
+  .sign-out-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--card-bg);
+    color: var(--secondary);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .sign-out-btn:hover {
+    background-color: #f8f8f8;
+    color: var(--primary);
+    border-color: var(--border-hover);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .user-profile {
+      padding: 0.5rem;
+      gap: 0.5rem;
+    }
+    
+    .user-info {
+      margin-right: 0.5rem;
+    }
+    
+    .user-name {
+      font-size: 0.8rem;
+    }
+    
+    .user-email {
+      font-size: 0.7rem;
+    }
+    
+    .sign-out-btn {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .user-profile {
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+      padding: 0.75rem;
+    }
+    
+    .user-info {
+      width: 100%;
+      margin: 0.5rem 0;
+      align-items: center;
+    }
+    
+    .sign-out-btn {
+      width: 100%;
+    }
+  }

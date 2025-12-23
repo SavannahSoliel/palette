@@ -3,12 +3,18 @@ import "./App.css";
 import CelebritySelect from "./components/CelebritySelect";
 import { getRecommendations } from "./utils/recommend";
 import Wishlist from "./components/Wishlist";
+import Auth from "./components/Auth";
+import { supabase } from "./lib/supabase";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   const [selectedCelebs, setSelectedCelebs] = useState([]);
   const [showWishlist, setShowWishlist] = useState(false);
   const [wishlist, setWishlist] = useState([]);
-  const [shuffleKey, setShuffleKey] = useState(0); // Key to control when to reshuffle
+  const [shuffleKey, setShuffleKey] = useState(0);
+  const [showAuth, setShowAuth] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Fade-in animation
   useEffect(() => {
@@ -21,6 +27,81 @@ function App() {
     
     return () => clearTimeout(timer);
   }, []);
+
+  // Check auth status on mount
+  useEffect(() => {
+    // Check current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user || null);
+      setLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user || null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Load wishlist from database when user logs in
+  useEffect(() => {
+    if (user) {
+      loadWishlistFromDB();
+    } else {
+      // If no user, load from localStorage as fallback
+      const savedWishlist = localStorage.getItem('palette-wishlist');
+      if (savedWishlist) {
+        setWishlist(JSON.parse(savedWishlist));
+      }
+    }
+  }, [user]);
+
+  // Save wishlist to database when it changes
+  useEffect(() => {
+    if (user && wishlist.length > 0) {
+      saveWishlistToDB();
+    }
+    // Always save to localStorage as backup
+    localStorage.setItem('palette-wishlist', JSON.stringify(wishlist));
+  }, [wishlist, user]);
+
+  // Database functions
+  const loadWishlistFromDB = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('user_wishlists')
+        .select('wishlist_items')
+        .eq('user_id', user.id)
+        .single();
+
+      if (error && error.code !== 'PGRST116') throw error; // PGRST116 = no rows
+      
+      if (data) {
+        setWishlist(data.wishlist_items || []);
+      }
+    } catch (error) {
+      console.error('Error loading wishlist:', error);
+    }
+  };
+
+  const saveWishlistToDB = async () => {
+    try {
+      const { error } = await supabase
+        .from('user_wishlists')
+        .upsert({
+          user_id: user.id,
+          wishlist_items: wishlist,
+          updated_at: new Date().toISOString(),
+        });
+
+      if (error) throw error;
+    } catch (error) {
+      console.error('Error saving wishlist:', error);
+    }
+  };
 
   // Get recommendations - memoized to prevent unnecessary recalculations
   const recommendations = useMemo(() => {
@@ -54,24 +135,83 @@ function App() {
     return wishlist.includes(productId);
   }, [wishlist]);
 
+  // Sign out
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setWishlist([]);
+  };
+
+  if (loading) {
+    return (
+      <div className="app loading">
+        <div className="loader"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
-      {/* Header with Wishlist Icon */}
+      {/* Header with Auth */}
       <div className="app-header">
         <div className="header-left">
           <h1>palette</h1>
           <p className="subtitle">your aesthetic, curated</p>
         </div>
-        <button 
-          className="wishlist-toggle"
-          onClick={() => setShowWishlist(!showWishlist)}
-        >
-          {showWishlist ? "← Back to Products" : "❤️ Wishlist"}
-          {wishlist.length > 0 && !showWishlist && (
-            <span className="wishlist-count">{wishlist.length}</span>
+        
+        <div className="header-right">
+          {user ? (
+            <div className="user-section">
+              <UserProfile user={user} onSignOut={handleSignOut} />
+              <button 
+                className="wishlist-toggle"
+                onClick={() => setShowWishlist(!showWishlist)}
+              >
+                {showWishlist ? "← Back to Products" : "❤️ Wishlist"}
+                {wishlist.length > 0 && !showWishlist && (
+                  <span className="wishlist-count">{wishlist.length}</span>
+                )}
+              </button>
+            </div>
+          ) : (
+            <div className="auth-section">
+              <button 
+                className="auth-button"
+                onClick={() => setShowAuth(true)}
+              >
+                Sign In to Save
+              </button>
+              <button 
+                className="wishlist-toggle guest"
+                onClick={() => setShowWishlist(!showWishlist)}
+              >
+                {showWishlist ? "← Back to Products" : "❤️ Wishlist"}
+                {wishlist.length > 0 && !showWishlist && (
+                  <span className="wishlist-count">{wishlist.length}</span>
+                )}
+              </button>
+            </div>
           )}
-        </button>
+        </div>
       </div>
+
+      {showAuth && (
+        <Auth 
+          onAuthSuccess={() => setShowAuth(false)}
+          onClose={() => setShowAuth(false)}
+        />
+      )}
+
+      {!user && !showAuth && (
+        <div className="auth-banner">
+          <p>✨ Sign in to save your wishlist across devices!</p>
+          <button 
+            className="auth-banner-btn"
+            onClick={() => setShowAuth(true)}
+          >
+            Sign In
+          </button>
+        </div>
+      )}
 
       {showWishlist ? (
         // Wishlist View
@@ -79,6 +219,7 @@ function App() {
           wishlist={wishlist} 
           setWishlist={setWishlist}
           toggleWishlistItem={toggleWishlistItem}
+          user={user}
         />
       ) : (
         // Main Product View
