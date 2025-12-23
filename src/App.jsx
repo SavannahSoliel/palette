@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import "./App.css";
 import CelebritySelect from "./components/CelebritySelect";
 import { getRecommendations } from "./utils/recommend";
@@ -8,6 +8,7 @@ function App() {
   const [selectedCelebs, setSelectedCelebs] = useState([]);
   const [showWishlist, setShowWishlist] = useState(false);
   const [wishlist, setWishlist] = useState([]);
+  const [shuffleKey, setShuffleKey] = useState(0); // Key to control when to reshuffle
 
   // Fade-in animation
   useEffect(() => {
@@ -21,13 +22,24 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  const recommendations = getRecommendations(selectedCelebs);
-  
-  // Shuffle the recommendations array
-  const shuffledRecommendations = shuffleArray([...recommendations]);
+  // Get recommendations - memoized to prevent unnecessary recalculations
+  const recommendations = useMemo(() => {
+    return getRecommendations(selectedCelebs);
+  }, [selectedCelebs]);
 
-  // Toggle wishlist item
-  const toggleWishlistItem = (productId) => {
+  // Memoize shuffled recommendations - only reshuffle when shuffleKey changes
+  const shuffledRecommendations = useMemo(() => {
+    if (recommendations.length === 0) return [];
+    return shuffleArray([...recommendations]);
+  }, [recommendations, shuffleKey]); // Add shuffleKey as a dependency
+
+  // Update shuffle key when celebrity selection changes
+  useEffect(() => {
+    setShuffleKey(prev => prev + 1);
+  }, [selectedCelebs]);
+
+  // Toggle wishlist item - memoized to prevent unnecessary re-renders
+  const toggleWishlistItem = useCallback((productId) => {
     setWishlist(prev => {
       if (prev.includes(productId)) {
         return prev.filter(id => id !== productId);
@@ -35,12 +47,12 @@ function App() {
         return [...prev, productId];
       }
     });
-  };
+  }, []);
 
   // Check if product is in wishlist
-  const isInWishlist = (productId) => {
+  const isInWishlist = useCallback((productId) => {
     return wishlist.includes(productId);
-  };
+  }, [wishlist]);
 
   return (
     <div className="app">
@@ -125,12 +137,16 @@ function App() {
   );
 }
 
+// Stable shuffle function using a seed
 function shuffleArray(array) {
   const shuffled = [...array];
   
+  // Use a seed for consistent shuffling
+  let seed = 0;
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor((Math.sin(seed + i) + 1) * 1000) % (i + 1);
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    seed++;
   }
   
   return shuffled;
