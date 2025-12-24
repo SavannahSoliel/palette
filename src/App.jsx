@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import "./App.css";
-import CelebritySelect from "./components/CelebritySelect";
-import { getRecommendations } from "./utils/recommend";
-import Wishlist from "./components/Wishlist";
-import Auth from "./components/Auth";
-import { supabase } from "./lib/supabase";
-import UserProfile from "./components/UserProfile";
+import CelebritySelect from "./components/CelebritySelect.jsx";
+import { getRecommendations } from "./utils/recommend.js";
+import Wishlist from "./components/Wishlist.jsx";
+import Auth from "./components/Auth.jsx";
+import { supabase } from "./lib/supabase.js";
+import UserProfile from "./components/UserProfile.jsx";
 
 function App() {
   const [selectedCelebs, setSelectedCelebs] = useState([]);
