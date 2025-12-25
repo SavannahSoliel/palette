@@ -10,8 +10,8 @@
   }
   
   .user-avatar {
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--border);
@@ -28,8 +28,8 @@
   }
   
   .user-avatar {
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     background: var(--accent-light);
     color: var(--accent);
