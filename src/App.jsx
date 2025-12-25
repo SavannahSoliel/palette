@@ -363,30 +363,24 @@ function App() {
         />
       )}
 
-{!user && !showAuth && (
-  <div className="auth-banner">
-    <p>✨ Sign in to save your wishlist across devices!</p>
-    <button
-      className="auth-banner-btn"
-      onClick={() => setShowAuth(true)}
-    >
-      Sign In
-    </button>
-  </div>
-)}
+      {!user && !showAuth && (
+        <div className="auth-banner">
+          <p>✨ Sign in to save your wishlist across devices!</p>
+          <button 
+            className="auth-banner-btn"
+            onClick={() => setShowAuth(true)}
+          >
+            Sign In
+          </button>
 
-{user && (
-  <div className="auth-banner">
-    <p>You’re signed in</p>
-    <button
-      className="auth-banner-btn"
-      onClick={onSignOut}
-    >
-      Sign Out
-    </button>
-  </div>
-)}
-
+          <button 
+            className="auth-banner-btn"
+            onClick={() => setShowAuth(false)}
+          >
+            Sign In
+          </button>
+        </div>
+      )}
       
       <HeroSlideshow />
 
