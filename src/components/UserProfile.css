@@ -40,7 +40,7 @@
   }
   
   .user-meta {
-    display: flex;
+    display: right;
     flex-direction: column;
     line-height: 1.1;
   }
