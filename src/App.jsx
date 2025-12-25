@@ -339,15 +339,6 @@ function App() {
                 )}
               </button>
               
-              {/* Manual save button */}
-              <button 
-                className="save-btn"
-                onClick={saveWishlistToDB}
-                title="Manually save wishlist"
-                disabled={isSaving}
-              >
-                {isSaving ? '⏳' : '💾'}
-              </button>
             </div>
           ) : (
             <div className="auth-section">
@@ -361,7 +352,7 @@ function App() {
                 className="wishlist-toggle guest"
                 onClick={() => setShowWishlist(!showWishlist)}
               >
-                {showWishlist ? "← Back to Products" : "❤️ Wishlist"}
+                {showWishlist ? "← Back to Products" : "❤️"}
                 {wishlist.length > 0 && !showWishlist && (
                   <span className="wishlist-count">{wishlist.length}</span>
                 )}
