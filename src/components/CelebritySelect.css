@@ -175,7 +175,7 @@
 /* Grid Layout for Search Results */
 .celebrity-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 1.5rem;
   padding: 0.5rem;
   margin-top: 0.5rem;
