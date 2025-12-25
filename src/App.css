@@ -757,11 +757,25 @@ h1 {
 
   @media (max-width: 480px) {
     .wishlist-toggle {
+      width: 65px;
+      height: 65px;
+      min-width: 36px;
+      min-height: 36px;
+  
+      padding: 0;
+      border-radius: 50%;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
       position: absolute;
       right: 1rem;
-      top: 1rem;
-      margin: 0;
+      top: 3.5rem; /* pushes it under the user avatar */
+  
+      flex: none;
     }
   }
+  
   
 }
