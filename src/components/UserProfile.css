@@ -16,6 +16,53 @@
     object-fit: cover;
     border: 2px solid var(--border);
   }
+
+  .user-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    padding: 0.4rem 0.75rem 0.4rem 0.4rem;
+  }
+  
+  .user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+  }
+  
+  .user-meta {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  
+  .user-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .sign-out {
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .sign-out:hover {
+    color: var(--accent);
+  }
+  
   
   .user-avatar-placeholder {
     width: 36px;

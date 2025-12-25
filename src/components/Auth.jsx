@@ -53,8 +53,8 @@ function Auth({ onAuthSuccess, onClose }) {
   };
 
   return (
-    <div className="auth-modal">
-      <div className="auth-container">
+    <div className="auth-overlay">
+        <div className="auth-card">
         <button className="auth-close" onClick={onClose}>×</button>
         
         <div className="auth-header">
