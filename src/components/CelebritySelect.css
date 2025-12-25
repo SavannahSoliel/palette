@@ -155,7 +155,7 @@
 }
 
 .celebrity-scroll::-webkit-scrollbar {
-  height: 6px;
+  height: 20px;
 }
 
 .celebrity-scroll::-webkit-scrollbar-track {
