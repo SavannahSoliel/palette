@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import "./App.css";
 import CelebritySelect from "./components/CelebritySelect.jsx";
 import { getRecommendations } from "./utils/recommend.js";
@@ -15,6 +15,13 @@ function App() {
   const [showAuth, setShowAuth] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [lastSaveTime, setLastSaveTime] = useState(null);
+  const [saveStatus, setSaveStatus] = useState(""); // NEW: Save status message
+  
+  // Use refs to track state without causing re-renders
+  const wishlistRef = useRef([]);
+  const saveTimeoutRef = useRef(null);
 
   // Fade-in animation
   useEffect(() => {
@@ -30,13 +37,11 @@ function App() {
 
   // Check auth status on mount
   useEffect(() => {
-    // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user || null);
       setLoading(false);
     });
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user || null);
@@ -46,48 +51,156 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  // Sync ref with wishlist state
+  useEffect(() => {
+    wishlistRef.current = wishlist;
+  }, [wishlist]);
+
   // Load wishlist from database when user logs in
   useEffect(() => {
     if (user) {
+      console.log('👤 User logged in, loading wishlist...');
       loadWishlistFromDB();
     } else {
-      // If no user, load from localStorage as fallback
       const savedWishlist = localStorage.getItem('palette-wishlist');
       if (savedWishlist) {
-        setWishlist(JSON.parse(savedWishlist));
+        try {
+          setWishlist(JSON.parse(savedWishlist));
+        } catch (e) {
+          setWishlist([]);
+        }
       }
     }
   }, [user]);
 
-  // Save wishlist to database when it changes
+  // FIXED: Auto-save when wishlist changes
   useEffect(() => {
-    if (user && wishlist.length > 0) {
-      saveWishlistToDB();
+    const saveToDB = async () => {
+      if (!user) {
+        localStorage.setItem('palette-wishlist', JSON.stringify(wishlist));
+        return;
+      }
+
+      console.log('💾 Auto-saving wishlist...', wishlist);
+      setIsSaving(true);
+      setSaveStatus("Saving...");
+      
+      try {
+        const { error } = await supabase
+          .from('user_wishlists')
+          .upsert({
+            user_id: user.id,
+            wishlist_items: wishlist,
+            updated_at: new Date().toISOString(),
+          }, {
+            onConflict: 'user_id'
+          });
+
+        if (error) {
+          console.error('❌ Save error:', error);
+          setSaveStatus("Save failed");
+          // Fallback: try insert instead of upsert
+          await supabase
+            .from('user_wishlists')
+            .insert({
+              user_id: user.id,
+              wishlist_items: wishlist,
+              updated_at: new Date().toISOString()
+            });
+        } else {
+          console.log('✅ Save successful!');
+          setLastSaveTime(new Date());
+          setSaveStatus("Saved!");
+          
+          // Clear success message after 2 seconds
+          setTimeout(() => {
+            setSaveStatus("");
+          }, 2000);
+        }
+      } catch (error) {
+        console.error('🔥 Critical save error:', error);
+        setSaveStatus("Error saving");
+      } finally {
+        setIsSaving(false);
+      }
+    };
+
+    // Clear any existing timeout
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
     }
-    // Always save to localStorage as backup
+    
+    // Always save to localStorage immediately
     localStorage.setItem('palette-wishlist', JSON.stringify(wishlist));
+    
+    // Debounced auto-save (800ms delay)
+    saveTimeoutRef.current = setTimeout(() => {
+      if (user && wishlist.length >= 0) { // Save even empty wishlists
+        saveToDB();
+      }
+    }, 800);
+    
+    return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+    };
   }, [wishlist, user]);
 
   // Database functions
   const loadWishlistFromDB = async () => {
+    if (!user) return;
+    
     try {
+      console.log('📥 Loading wishlist from DB for:', user.email);
+      
       const { data, error } = await supabase
         .from('user_wishlists')
-        .select('wishlist_items')
+        .select('wishlist_items, updated_at')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') throw error; // PGRST116 = no rows
+      if (error && error.code !== 'PGRST116') {
+        console.error('❌ DB Load Error:', error);
+        throw error;
+      }
       
-      if (data) {
-        setWishlist(data.wishlist_items || []);
+      if (data && data.wishlist_items) {
+        console.log('✅ Loaded from DB:', data.wishlist_items.length, 'items');
+        setWishlist(data.wishlist_items);
+        setLastSaveTime(new Date(data.updated_at));
+      } else {
+        console.log('📭 No wishlist found in DB, checking localStorage');
+        const saved = localStorage.getItem('palette-wishlist');
+        if (saved) {
+          try {
+            setWishlist(JSON.parse(saved));
+          } catch (e) {
+            setWishlist([]);
+          }
+        }
       }
     } catch (error) {
-      console.error('Error loading wishlist:', error);
+      console.error('🔥 Error loading wishlist:', error);
+      const saved = localStorage.getItem('palette-wishlist');
+      if (saved) {
+        try {
+          setWishlist(JSON.parse(saved));
+        } catch (e) {
+          setWishlist([]);
+        }
+      }
     }
   };
 
+  // Manual save function
   const saveWishlistToDB = async () => {
+    if (!user) return;
+    
+    console.log('💾 Manual save triggered');
+    setIsSaving(true);
+    setSaveStatus("Saving manually...");
+    
     try {
       const { error } = await supabase
         .from('user_wishlists')
@@ -97,9 +210,25 @@ function App() {
           updated_at: new Date().toISOString(),
         });
 
-      if (error) throw error;
+      if (error) {
+        console.error('❌ Manual save error:', error);
+        setSaveStatus("Manual save failed");
+        throw error;
+      }
+      
+      console.log('✅ Manual save successful!');
+      setLastSaveTime(new Date());
+      setSaveStatus("Manually saved!");
+      
+      setTimeout(() => {
+        setSaveStatus("");
+      }, 2000);
+      
     } catch (error) {
-      console.error('Error saving wishlist:', error);
+      console.error('🔥 Manual save failed:', error);
+      setSaveStatus("Error saving");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -108,25 +237,28 @@ function App() {
     return getRecommendations(selectedCelebs);
   }, [selectedCelebs]);
 
-  // Memoize shuffled recommendations - only reshuffle when shuffleKey changes
+  // Memoize shuffled recommendations
   const shuffledRecommendations = useMemo(() => {
     if (recommendations.length === 0) return [];
     return shuffleArray([...recommendations]);
-  }, [recommendations, shuffleKey]); // Add shuffleKey as a dependency
+  }, [recommendations, shuffleKey]);
 
   // Update shuffle key when celebrity selection changes
   useEffect(() => {
     setShuffleKey(prev => prev + 1);
   }, [selectedCelebs]);
 
-  // Toggle wishlist item - memoized to prevent unnecessary re-renders
+  // Toggle wishlist item
   const toggleWishlistItem = useCallback((productId) => {
+    console.log('❤️ Toggling product:', productId);
+    
     setWishlist(prev => {
-      if (prev.includes(productId)) {
-        return prev.filter(id => id !== productId);
-      } else {
-        return [...prev, productId];
-      }
+      const newWishlist = prev.includes(productId) 
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId];
+      
+      console.log('📝 New wishlist:', newWishlist);
+      return newWishlist;
     });
   }, []);
 
@@ -139,6 +271,8 @@ function App() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setWishlist([]);
+    wishlistRef.current = [];
+    setLastSaveTime(null);
   };
 
   if (loading) {
@@ -151,6 +285,33 @@ function App() {
 
   return (
     <div className="app">
+      {/* Saving indicator */}
+      <div className={`save-status-indicator ${isSaving ? 'saving' : saveStatus ? 'saved' : ''}`}>
+        {isSaving ? (
+          <>
+            <div className="save-spinner"></div>
+            <span>Saving...</span>
+          </>
+        ) : saveStatus ? (
+          <span>{saveStatus}</span>
+        ) : lastSaveTime ? (
+          <span>Saved {formatTimeAgo(lastSaveTime)}</span>
+        ) : null}
+      </div>
+
+      {/* Debug panel (remove in production) */}
+      {process.env.NODE_ENV === 'development' && user && (
+        <div className="debug-panel">
+          <div>Items: {wishlist.length}</div>
+          <button onClick={saveWishlistToDB} className="debug-btn">
+            💾 Test Save
+          </button>
+          <button onClick={() => console.log('Wishlist:', wishlist)} className="debug-btn">
+            📋 Log State
+          </button>
+        </div>
+      )}
+
       {/* Header with Auth */}
       <div className="app-header">
         <div className="header-left">
@@ -170,6 +331,16 @@ function App() {
                 {wishlist.length > 0 && !showWishlist && (
                   <span className="wishlist-count">{wishlist.length}</span>
                 )}
+              </button>
+              
+              {/* Manual save button */}
+              <button 
+                className="save-btn"
+                onClick={saveWishlistToDB}
+                title="Manually save wishlist"
+                disabled={isSaving}
+              >
+                {isSaving ? '⏳' : '💾'}
               </button>
             </div>
           ) : (
@@ -214,7 +385,6 @@ function App() {
       )}
 
       {showWishlist ? (
-        // Wishlist View
         <Wishlist 
           wishlist={wishlist} 
           setWishlist={setWishlist}
@@ -222,9 +392,7 @@ function App() {
           user={user}
         />
       ) : (
-        // Main Product View
         <>
-          {/* Celebrity Select */}
           <h2 className="section-title">celebrity select</h2>
           <CelebritySelect
             selected={selectedCelebs}
@@ -235,7 +403,6 @@ function App() {
             selected: {selectedCelebs.length > 0 ? selectedCelebs.join(", ") : "none"}
           </p>
 
-          {/* Recommendations */}
           <h2 className="section-title">recommended products</h2>
 
           {recommendations.length === 0 ? (
@@ -278,19 +445,36 @@ function App() {
   );
 }
 
-// Stable shuffle function using a seed
+// Stable shuffle function
 function shuffleArray(array) {
   const shuffled = [...array];
-  
-  // Use a seed for consistent shuffling
   let seed = 0;
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor((Math.sin(seed + i) + 1) * 1000) % (i + 1);
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     seed++;
   }
-  
   return shuffled;
+}
+
+// Helper function to format time ago
+function formatTimeAgo(date) {
+  const seconds = Math.floor((new Date() - date) / 1000);
+  
+  if (seconds < 10) return 'just now';
+  if (seconds < 60) return `${seconds} seconds ago`;
+  
+  const minutes = Math.floor(seconds / 60);
+  if (minutes === 1) return '1 minute ago';
+  if (minutes < 60) return `${minutes} minutes ago`;
+  
+  const hours = Math.floor(minutes / 60);
+  if (hours === 1) return '1 hour ago';
+  if (hours < 24) return `${hours} hours ago`;
+  
+  const days = Math.floor(hours / 24);
+  if (days === 1) return '1 day ago';
+  return `${days} days ago`;
 }
 
 export default App;
