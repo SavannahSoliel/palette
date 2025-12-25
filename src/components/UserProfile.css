@@ -46,12 +46,16 @@
   }
   
   .user-name {
+    font-family: serif;
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--accent);
   }
   
+  
   .sign-out {
-    font-size: 0.7rem;
+    font-size: 10rem;
     color: var(--muted);
     background: none;
     border: none;
@@ -61,8 +65,7 @@
   
   .sign-out:hover {
     color: var(--accent);
-  }
-  
+  }  
   
   .user-avatar-placeholder {
     width: 36px;
@@ -83,13 +86,7 @@
     flex-direction: column;
     margin-right: 0.75rem;
   }
-  
-  .user-name {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--primary);
-  }
-  
+
   .user-email {
     font-size: 0.75rem;
     color: var(--secondary);
@@ -123,10 +120,6 @@
     
     .user-info {
       margin-right: 0.5rem;
-    }
-    
-    .user-name {
-      font-size: 0.8rem;
     }
     
     .user-email {
