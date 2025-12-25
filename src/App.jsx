@@ -373,12 +373,6 @@ function App() {
             Sign In
           </button>
 
-          <button 
-            className="auth-banner-btn"
-            onClick={() => setShowAuth(false)}
-          >
-            Sign In
-          </button>
         </div>
       )}
       
