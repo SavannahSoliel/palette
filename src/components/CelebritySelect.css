@@ -181,6 +181,19 @@
   margin-top: 0.5rem;
 }
 
+.browse-label {
+  display: inline-block;
+  margin-bottom: -.1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: rgb(190, 132, 157);
+  background: rgba(255, 126, 182, 0.12);
+  padding: 0.45rem 1.3rem;
+  border-radius: 999px;
+}
+
+
 /* Each celebrity card */
 .celebrity-card {
   display: flex;

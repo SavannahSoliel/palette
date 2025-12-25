@@ -319,10 +319,11 @@ function App() {
 
       {/* Header with Auth */}
       <div className="app-header">
-        <div className="header-left">
-          <h1>palette</h1>
-          <p className="subtitle">your aesthetic, curated</p>
-        </div>
+      <div className="header-left">
+        <h1 className="brand-title">palette</h1>
+        <p className="brand-tagline">your aesthetic, curated</p>
+      </div>
+
         
         <div className="header-right">
           {user ? (
@@ -400,7 +401,9 @@ function App() {
         />
       ) : (
         <>
-          <h2 className="section-title">celebrity select</h2>
+          <div className="celebrity-header">
+            <span className="celebrity-pill">celebrity select</span>
+          </div>
           <CelebritySelect
             selected={selectedCelebs}
             setSelected={setSelectedCelebs}
@@ -410,7 +413,9 @@ function App() {
             selected: {selectedCelebs.length > 0 ? selectedCelebs.join(", ") : "none"}
           </p>
 
-          <h2 className="section-title">recommended products</h2>
+          <div className="celebrity-header">
+            <span className="celebrity-pill">recomended</span>
+          </div>
 
           {recommendations.length === 0 ? (
             <p className="empty-state">

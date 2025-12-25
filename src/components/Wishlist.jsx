@@ -15,8 +15,11 @@ function Wishlist({ wishlist, setWishlist, toggleWishlistItem }) {
     return (
       <div className="wishlist-empty">
         <div className="empty-heart">🤍</div>
-        <h2>Your wishlist is empty</h2>
-        <p>Start by clicking the heart icon on products you love!</p>
+                <p>
+                    nothing is saved yet. tap the heart on anything
+                <span> to save</span>.
+                </p>
+            
       </div>
     );
   }
@@ -24,7 +27,7 @@ function Wishlist({ wishlist, setWishlist, toggleWishlistItem }) {
   return (
     <div className="wishlist-container">
       <div className="wishlist-header">
-        <h2 className="section-title">My Wishlist</h2>
+        <span className="my-wish">my wishlist</span>
         <div className="wishlist-stats">
           <span>{wishlist.length} {wishlist.length === 1 ? 'item' : 'items'}</span>
           <button 

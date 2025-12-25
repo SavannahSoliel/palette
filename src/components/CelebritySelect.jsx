@@ -36,7 +36,7 @@ function CelebritySelect({ selected, setSelected }) {
       {/* Top Bar with Browse All, Search, and Clear All */}
       <div className="top-controls">
         <div className="left-section">
-          <h3 className="trending-title">browse all</h3>
+        <span className="browse-label">browse all</span>
           {selected.length > 0 && (
             <div className="selection-count">
               {selected.length} selected
