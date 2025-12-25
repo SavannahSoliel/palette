@@ -333,7 +333,7 @@ function App() {
                 className="wishlist-toggle"
                 onClick={() => setShowWishlist(!showWishlist)}
               >
-                {showWishlist ? "← Back to Products" : "❤️"}
+                {showWishlist ? "←" : "❤️"}
                 {wishlist.length > 0 && !showWishlist
                   
                 }
