@@ -11,7 +11,6 @@ function App() {
   const [selectedCelebs, setSelectedCelebs] = useState([]);
   const [showWishlist, setShowWishlist] = useState(false);
   const [wishlist, setWishlist] = useState([]);
-  const [shuffleKey, setShuffleKey] = useState(0);
   const [showAuth, setShowAuth] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,8 +18,8 @@ function App() {
   const [lastSaveTime, setLastSaveTime] = useState(null);
   const [saveStatus, setSaveStatus] = useState("");
   
-  // Track original recommendations before shuffle
-  const originalRecommendationsRef = useRef([]);
+  // Track shuffle seed that changes when celebrity selection changes
+  const shuffleSeedRef = useRef(0);
   
   // Use refs to track state without causing re-renders
   const wishlistRef = useRef([]);
@@ -235,22 +234,22 @@ function App() {
     }
   };
 
-  // Get recommendations - memoized to prevent unnecessary recalculations
+  // Get recommendations
   const recommendations = useMemo(() => {
-    const recs = getRecommendations(selectedCelebs);
-    originalRecommendationsRef.current = recs; // Store original order
-    return recs;
+    return getRecommendations(selectedCelebs);
   }, [selectedCelebs]);
 
-  // IMPROVED: Shuffle only when celebrity selection changes, not when user interacts
+  // FIXED: Shuffle with random seed that changes on celebrity selection
   const shuffledRecommendations = useMemo(() => {
     if (recommendations.length === 0) return [];
     
-    // Only shuffle if we have new recommendations (celeb selection changed)
-    // This prevents re-shuffling when user likes/dislikes products
-    console.log('🔀 Shuffling recommendations for new celebrity selection');
-    return shuffleArray([...recommendations]);
-  }, [recommendations]); // Removed shuffleKey dependency
+    console.log('🔀 Shuffling with new seed');
+    
+    // Create a timestamp-based seed for randomness
+    const shuffleSeed = Date.now() + Math.random();
+    
+    return shuffleArray([...recommendations], shuffleSeed);
+  }, [recommendations, selectedCelebs]); // Add selectedCelebs as dependency
 
   // Toggle wishlist item
   const toggleWishlistItem = useCallback((productId) => {
@@ -429,7 +428,6 @@ function App() {
                         alt={product.name}
                         className="product-thumbnail"
                         onError={(e) => {
-                          // Fallback if image fails to load
                           e.target.style.display = 'none';
                         }}
                       />
@@ -453,22 +451,23 @@ function App() {
   );
 }
 
-// Better shuffle function with consistent results for same input
-function shuffleArray(array) {
+// FIXED: Random shuffle function that gives different results each time
+function shuffleArray(array, seed) {
   if (array.length === 0) return [];
   
   // Create a copy to avoid mutating the original
   const shuffled = [...array];
   
-  // Use a seed based on array content for consistent shuffling
-  let seed = 0;
-  for (let i = 0; i < array.length; i++) {
-    seed += array[i].id * (i + 1);
-  }
+  // Use the provided seed for randomness
+  let currentSeed = seed || Date.now() + Math.random();
   
-  // Fisher-Yates shuffle with seed
+  // Fisher-Yates shuffle with random seed
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor((Math.sin(seed + i) + 1) * 1000) % (i + 1);
+    // Generate random index using the seed
+    const random = Math.sin(currentSeed++) * 10000;
+    const j = Math.floor((random - Math.floor(random)) * (i + 1));
+    
+    // Swap elements
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   
