@@ -10,8 +10,8 @@
   }
   
   .user-avatar {
-    width: 36px;
-    height: 36px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--border);
@@ -163,4 +163,3 @@
     .sign-out-btn {
       width: 100%;
     }
-  }
