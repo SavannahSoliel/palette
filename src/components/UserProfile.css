@@ -159,6 +159,15 @@
       margin: 0.5rem 0;
       align-items: center;
     }
+
+    @media (max-width: 480px) {
+        .user-avatar-btn {
+          position: absolute;
+          right: 1rem;
+          top: 0.75rem;
+          margin: 0;
+        }
+    }      
     
     .sign-out-btn {
       width: 100%;
