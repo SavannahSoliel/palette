@@ -129,6 +129,7 @@ h1 {
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 1.25rem;
+  background-color: var(--pink-pastel);  /* Pastel pink background */
   transition: transform 0.3s ease;
 }
 
@@ -354,6 +355,128 @@ h1 {
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(-10px);
+}
+
+/* ===== HERO SLIDESHOW ===== */
+.hero-slideshow {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 4rem;
+  box-shadow: var(--shadow);
+  background: var(--pink-pastel);
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Soft pink overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255, 202, 212, 0.25),
+    rgba(255, 202, 212, 0.35)
+  );
+  z-index: 1;
+}
+
+/* Text overlay */
+.hero-content {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+  z-index: 2;
+  max-width: 500px;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-family: serif;
+  font-weight: 400;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--secondary);
+  background: rgba(255, 255, 255, 0.75);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* Dots navigation */
+.hero-dots {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-dot.active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+/* ===== RESPONSIVE HERO ===== */
+@media (max-width: 768px) {
+  .hero-slideshow {
+    height: 300px;
+    border-radius: 18px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-content {
+    left: 1.5rem;
+    bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slideshow {
+    height: 240px;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-dots {
+    right: 1.25rem;
+  }
 }
 
 .save-status-indicator.saving {

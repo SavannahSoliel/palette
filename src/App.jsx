@@ -6,6 +6,8 @@ import Wishlist from "./components/Wishlist.jsx";
 import Auth from "./components/Auth.jsx";
 import { supabase } from "./lib/supabase.js";
 import UserProfile from "./components/UserProfile.jsx";
+import HeroSlideshow from "./components/HeroSlideshow.jsx";
+
 
 function App() {
   const [selectedCelebs, setSelectedCelebs] = useState([]);
@@ -386,6 +388,8 @@ function App() {
           </button>
         </div>
       )}
+      
+      <HeroSlideshow />
 
       {showWishlist ? (
         <Wishlist 
