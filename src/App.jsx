@@ -334,9 +334,6 @@ function App() {
                 onClick={() => setShowWishlist(!showWishlist)}
               >
                 {showWishlist ? "←" : "❤️"}
-                {wishlist.length > 0 && !showWishlist
-                  
-                }
               </button>
               
             </div>
