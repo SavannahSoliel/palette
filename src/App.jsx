@@ -349,10 +349,7 @@ function App() {
                 className="wishlist-toggle guest"
                 onClick={() => setShowWishlist(!showWishlist)}
               >
-                {showWishlist ? "← Back to Products" : "❤️"}
-                {wishlist.length > 0 && !showWishlist && (
-                  <span className="wishlist-count">{wishlist.length}</span>
-                )}
+                {showWishlist ? "←" : "❤️"}
               </button>
             </div>
           )}
