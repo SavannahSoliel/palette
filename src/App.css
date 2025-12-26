@@ -676,8 +676,10 @@ h1 {
   }
   
   .wishlist-toggle {
-    width: 100%;
+    width: 65px; /* Keep the original width */
+    height: 65px; /* Keep the original height */
     justify-content: center;
+    flex-shrink: 0; /* Prevent shrinking */
   }
   
   .auth-button, .wishlist-toggle {
